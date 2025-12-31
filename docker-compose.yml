@@ -1,8 +1,17 @@
-# docker-compose.yml
 services:
   mongodb:
     image: mongo:7
-    container_name: mongodb
+    container_name: todolisthafifa-mongodb
     restart: unless-stopped
     ports:
       - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+    healthcheck:
+      test: ["CMD", "mongosh", "--quiet", "mongodb://localhost:27017/admin", "--eval", "db.runCommand({ ping: 1 }).ok"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+volumes:
+  mongo_data:
