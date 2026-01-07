@@ -14,7 +14,7 @@ export const connectToDB = async () => {
   try {
     await client.connect();
     console.log(client);
-    DB = client.db("LiorDataBase");
+    DB = client.db();
     TasksCollection = DB.collection("Tasks");
     console.log(
       `Connected to DB! ${DB.databaseName} - collection ${TasksCollection.collectionName}`
